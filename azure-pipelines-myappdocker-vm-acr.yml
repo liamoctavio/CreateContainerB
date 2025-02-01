@@ -67,8 +67,7 @@ stages:
                     echo ${ACR_PASSWORD} | sudo docker login ${ACR_NAME}.azurecr.io -u ${ACR_USERNAME} --password-stdin > /dev/null 2>&1
 
                     # Descargar la imagen desde ACR
-                    sudo docker pull ${ACR_NAME}.azurecr.io/${IMAGE_NAME}:latest
-
+                    sudo docker pull ${ACR_NAME}.azurecr.io/myappgrupo5-nginx-s6b:latest
                     # Verificar si el contenedor ya está en ejecución
                     if sudo docker ps -a --format '{{.Names}}' | grep -Eq "^nginx_container\$"; then
                       echo "El contenedor 'nginx_container' ya existe. Eliminándolo..."
@@ -78,7 +77,7 @@ stages:
 
                     # Ejecutar el nuevo contenedor
                     echo "Ejecutando un nuevo contenedor con la imagen de ACR..."
-                    sudo docker run -d -p 80:80 --name nginx_container ${ACR_NAME}.azurecr.io/${IMAGE_NAME}:latest                  
+                    sudo docker run -d -p 80:80 --name nginx_container ${ACR_NAME}.azurecr.io/myappgrupo5-nginx-s6b:latest                  
 
                     sudo docker ps
                   displayName: "Descargar y ejecutar la imagen Nginx desde ACR"
