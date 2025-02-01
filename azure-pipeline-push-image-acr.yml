@@ -5,8 +5,8 @@ trigger:
 
 variables:
   # Variables de entorno
-  ACR_NAME: "mygrupo5devops" # Colocar el nombre de tu ACR
-  IMAGE_NAME: "myappgrupo5-nginx-s6" # Colocar el Nombre de Imagen
+  ACR_NAME: "myappdevopsGrupo5b" # Colocar el nombre de tu ACR
+  IMAGE_NAME: "myappgrupo5-nginx-s6b" # Colocar el Nombre de Imagen
   SERVICE_CONNECTION_NAME: "myappsgrupo5-devops-s6-b" # Colocar nombre del Service Connection ubicado en Docker Registry-- Azure Container Registry
 
 jobs:
