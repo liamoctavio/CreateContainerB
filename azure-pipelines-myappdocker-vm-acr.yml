@@ -63,7 +63,7 @@ stages:
 
                 - script: |
                     echo "Autenticándose en Azure Container Registry..."
-                    echo ${ACR_PASSWORD} | sudo docker login myappdevopsgrupo5b.azurecr.io -u ${ACR_USERNAME} --password-stdin
+                    echo "YGHXT1F6tPK/gQdmkNZHJ86J2gEY6gTP2OKS8YwVt7+ACRCUM6Ib" | sudo docker login myappdevopsgrupo5b.azurecr.io -u "myappdevopsgrupo5b" --password-stdin
                   displayName: "Autenticación en ACR"
 
                 - script: |
