@@ -62,12 +62,16 @@ stages:
                   failOnStderr: true
 
                 - script: |
-                    # Autenticarse en Azure Container Registry utilizando nombre de usuario y contraseña
-                    echo "Autenticándose en Azure Container Registry y ejecutando la imagen Docker..."
-                    echo ${ACR_PASSWORD} | sudo docker login ${ACR_NAME}.azurecr.io -u ${ACR_USERNAME} --password-stdin > /dev/null 2>&1
+                    echo "Autenticándose en Azure Container Registry..."
+                    echo ${ACR_PASSWORD} | sudo docker login ${ACR_NAME}.azurecr.io -u ${ACR_USERNAME} --password-stdin
+                  displayName: "Autenticación en ACR"
 
-                    # Descargar la imagen desde ACR
-                    sudo docker pull ${ACR_NAME}.azurecr.io/myappgrupo5-nginx-s6b:latest
+                - script: |
+                    echo "Descargando imagen desde ACR..."
+                    sudo docker pull ${ACR_NAME}.azurecr.io/${IMAGE_NAME}:latest
+                  displayName: "Descargar imagen desde ACR"
+
+                - script: |
                     # Verificar si el contenedor ya está en ejecución
                     if sudo docker ps -a --format '{{.Names}}' | grep -Eq "^nginx_container\$"; then
                       echo "El contenedor 'nginx_container' ya existe. Eliminándolo..."
@@ -78,6 +82,7 @@ stages:
                     # Ejecutar el nuevo contenedor
                     echo "Ejecutando un nuevo contenedor con la imagen de ACR..."
                     sudo docker run -d -p 80:80 --name nginx_container ${ACR_NAME}.azurecr.io/myappgrupo5-nginx-s6b:latest                  
+                    echo "Mostrando los contenedores en ejecución..."
 
                     sudo docker ps
                   displayName: "Descargar y ejecutar la imagen Nginx desde ACR"
