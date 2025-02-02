@@ -63,12 +63,12 @@ stages:
 
                 - script: |
                     echo "Autenticándose en Azure Container Registry..."
-                    echo ${ACR_PASSWORD} | sudo docker login ${ACR_NAME}.azurecr.io -u ${ACR_USERNAME} --password-stdin
+                    echo ${ACR_PASSWORD} | sudo docker login myappdevopsgrupo5b.azurecr.io -u ${ACR_USERNAME} --password-stdin
                   displayName: "Autenticación en ACR"
 
                 - script: |
                     echo "Descargando imagen desde ACR..."
-                    sudo docker pull ${ACR_NAME}.azurecr.io/myappgrupo5-nginx-s6b:v1
+                    sudo docker pull myappdevopsgrupo5b.azurecr.io/myappgrupo5-nginx-s6b:latest
                   displayName: "Descargar imagen desde ACR"
 
                 - script: |
